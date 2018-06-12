@@ -1,0 +1,19 @@
+<div class="msg-container"
+     [ngClass]="{'base-sent': true, 'base-receive': false}">
+
+  <div class="avatar"
+       *ngIf="true">
+    <img alt="avatar">
+  </div>
+
+  <div class="messages"
+    [ngClass]="{'msg-sent': true, 'msg-receive': false}">
+    <p>message.text</p>
+    <p class="time">message.sender • message.sentAt $Time</p>
+  </div>
+
+  <div class="avatar"
+       *ngIf="false">
+    <img alt="avatar">
+  </div>
+</div>
