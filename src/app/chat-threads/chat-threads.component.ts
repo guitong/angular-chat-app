@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, from } from 'rxjs';
+import { ThreadsService } from '../thread/thread.service';
 
 @Component({
     selector: 'chat-threads',
@@ -9,14 +10,11 @@ import { Observable, from } from 'rxjs';
 export class ChatThreadsComponent implements OnInit {
     threads: Observable<any[]>;
 
-    constructor() { }
+    constructor(
+        public threadsService: ThreadsService,
+    ) {}
 
     ngOnInit() {
-        this.threads = from([[
-            {a: 1},
-            {b: 1},
-            {c: 1},
-            {d: 1},
-        ]]);
+        this.threads = this.threadsService.orderedThreads;
     }
 }

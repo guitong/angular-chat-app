@@ -1,19 +1,19 @@
 <div class="msg-container"
-     [ngClass]="{'base-sent': true, 'base-receive': false}">
+     [ngClass]="{'base-sent': !incoming, 'base-receive': incoming}">
 
   <div class="avatar"
-       *ngIf="true">
-    <img alt="avatar">
+       *ngIf="!incoming">
+    <img src="{{message.author.avatarSrc}}">
   </div>
 
   <div class="messages"
-    [ngClass]="{'msg-sent': true, 'msg-receive': false}">
-    <p>message.text</p>
-    <p class="time">message.sender • message.sentAt $Time</p>
+    [ngClass]="{'msg-sent': !incoming, 'msg-receive': incoming}">
+    <p>{{message.text}}</p>
+    <p class="time">{{message.sender}} • {{message.sentAt | fromNow}}</p>
   </div>
 
   <div class="avatar"
-       *ngIf="false">
-    <img alt="avatar">
+       *ngIf="incoming">
+    <img src="{{message.author.avatarSrc}}">
   </div>
 </div>

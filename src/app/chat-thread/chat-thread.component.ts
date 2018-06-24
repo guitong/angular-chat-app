@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Thread } from '../thread/thread.model';
+import { ThreadsService } from '../thread/thread.service';
 
 @Component({
     selector: 'chat-thread',
@@ -6,7 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ChatThreadComponent implements OnInit {
-    constructor() { }
+    @Input() thread: Thread;
+    selected = false;
 
-    ngOnInit() { }
+    constructor(
+        public threadsService: ThreadsService,
+    ) {}
+
+    ngOnInit(): void {
+        this.threadsService.currentThread
+            .subscribe((currentThread: Thread) => {
+                this.selected = currentThread && this.thread &&
+                    (currentThread.id === this.thread.id);
+            });
+    }
+
+    clicked(event: any): void {
+        this.threadsService.setCurrentThread(this.thread);
+        event.preventDefault();
+    }
 }
